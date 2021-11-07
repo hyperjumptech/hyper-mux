@@ -3,6 +3,7 @@ package hyper_mux
 import (
 	"bytes"
 	"context"
+	"github.com/NYTimes/gziphandler"
 	"github.com/rs/cors"
 	"math/rand"
 	"net/http"
@@ -28,6 +29,11 @@ type ContextKey string
 const (
 	RequestID ContextKey = "REQUEST-ID"
 )
+
+// GZIPCompressMiddleware is a wrapper for easy GZIP Content Handling.
+func GZIPCompressMiddleware(next http.Handler) http.Handler {
+	return gziphandler.GzipHandler(next)
+}
 
 // ContextSetterMiddleware is a middleware function that will ensure the request context existance.
 func ContextSetterMiddleware(next http.Handler) http.Handler {
