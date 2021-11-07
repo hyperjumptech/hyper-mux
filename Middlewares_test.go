@@ -27,4 +27,5 @@ func TestNewCORSMiddleware(t *testing.T) {
 	assert.NoError(t, err)
 	mux.ServeHTTP(recorder, requst)
 	assert.Equal(t, 200, recorder.Code)
+	assert.Equal(t, "OK", recorder.Body.String())
 }
